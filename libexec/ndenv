@@ -84,8 +84,13 @@ case "$command" in
 * )
   command_path="$(command -v "ndenv-$command" || true)"
   if [ -z "$command_path" ]; then
-    echo "ndenv: no such command \`$command'" >&2
-    exit 1
+    if [ "$command" = "install" ]; then
+      echo "plenv: Please install node-build."
+      exit 1
+    else
+      echo "ndenv: no such command \`$command'" >&2
+      exit 1
+    fi
   fi
 
   shift 1
